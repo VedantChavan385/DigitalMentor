@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@600&display=swap');
+
+:root{ 
+    --primary:#1e90ff; 
+    --bg:#e9f1ff; 
+    --muted:#6c7a89 ;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+body{
+     background: linear-gradient(180deg,var(--bg),#ffffff); 
+     font-family: Inter, system-ui, Arial; color:#0a192f; 
+     font-size:17px ;
+}
+
+.navbar-brand{ 
+    font-family:Poppins, Inter; 
+    font-size:20px; 
+}
+
+.hero{ 
+    border-radius:14px ;
+}
+.card{ 
+    border-radius:12px; 
+    transition: transform .25s ease, box-shadow .25s ease ;
+}
+
+.hover-lift:hover{ 
+    transform: translateY(-6px); 
+    box-shadow: 0 12px 30px rgba(30,144,255,0.08) ;
+}
+
+.btn-primary{ 
+    background:var(--primary); 
+    border-color:var(--primary); 
+    box-shadow: 0 6px 18px rgba(30,144,255,0.08) ;
+}
+
+.btn-primary:hover{ 
+    transform: translateY(-2px); 
+    box-shadow: 0 10px 22px rgba(30,144,255,0.12); 
+}
+
+.resource-content img{ 
+    max-width:100%; 
+}
+
+.container{ 
+    padding-left:18px; 
+    padding-right:18px; 
+}
+
+@media (max-width:768px){ .display-5{ font-size:28px } .hero{ padding:20px } }
+
+
+/* Footer */
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-links,.f-info-socials,.f-info-brand{
+     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-socials i {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.f-info{
+    text-align: center;
+    height: 8rem;
+    background-color: #ebebeb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+
+/* Sticky footer using flex layout: ensure footer sits at bottom on short pages */
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+main {
+    flex: 1 0 auto; /* allow main to grow and push footer to bottom */
+}
+footer {
+    flex-shrink: 0;
+}

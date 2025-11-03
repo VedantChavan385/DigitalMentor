@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+<%- include('partials/messages') %>
+<h2 data-aos='fade-down'>Session Requests</h2>
+<% if (!requests || requests.length === 0) { %>
+  <div class='card p-3 mb-3' data-aos='fade-up'>
+    <p class='text-muted'>No session requests at the moment.</p>
+  </div>
+<% } else { %>
+  <% requests.forEach(r=>{ %>
+    <div class='card p-3 mb-3' data-aos='fade-up'>
+      <strong>Mentee:</strong> <%= r.mentee.name %>
+      <p>Date: <%= r.date.toLocaleString() %></p>
+      <p>Note: <%= r.note %></p>
+      <p>Status: <%= r.status %></p>
+      <form method='POST' action='/sessions/requests/<%= r._id %>/accept' style='display:inline'><button class='btn btn-success btn-sm'>Accept</button></form>
+      <form method='POST' action='/sessions/requests/<%= r._id %>/reject' style='display:inline'><button class='btn btn-danger btn-sm'>Reject</button></form>
+    </div>
+  <% }) %>
+<% } %>
+<%- include('partials/footer') %>

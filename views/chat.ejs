@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+<%- include('partials/messages') %>
+<h3 data-aos='fade-down'>Chat</h3>
+<div id='chatBox' style='height:400px; overflow:auto; background:#f8fbff; padding:12px' data-aos='fade-up'>
+  <% msgs.forEach(m=>{ %>
+    <div class='mb-2'><strong><%= m.from.name %>:</strong> <%= m.content %> <small class='text-muted'><%= m.createdAt.toLocaleString() %></small></div>
+  <% }) %>
+</div>
+<form id='chatForm'>
+  <textarea id='msg' class='form-control' required></textarea>
+  <button class='btn btn-primary mt-2'>Send</button>
+</form>
+<script>
+  const socket = io();
+  const room = ['<%= (locals.user && locals.user._id) || "" %>', '<%= withId %>'].sort().join('-');
+  socket.emit('joinRoom', { room });
+  document.getElementById('chatForm').addEventListener('submit', e=>{ e.preventDefault(); const content = document.getElementById('msg').value; socket.emit('chatMessage', { from: '<%= locals.user._id %>', to: '<%= withId %>', content, room }); document.getElementById('msg').value = ''; });
+  socket.on('newMessage', data => { const box = document.getElementById('chatBox'); const div = document.createElement('div'); div.innerHTML = '<strong>' + (data.from==='<%= locals.user._id %>'? 'You' : 'Them') + ':</strong> ' + data.content; box.appendChild(div); box.scrollTop = box.scrollHeight; });
+</script>
+<%- include('partials/footer') %>

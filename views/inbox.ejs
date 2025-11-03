@@ -1,0 +1,14 @@
+<%- include('partials/header') %>
+<%- include('partials/messages') %>
+<h2 data-aos='fade-down'>Your Inbox</h2>
+<% if(messages.length===0){ %>
+  <div class='alert alert-info'>No messages yet.</div>
+<% } %>
+<% messages.forEach(m=>{ %>
+  <div class='card p-3 mb-3' data-aos='fade-up'>
+    <strong>From: <%= m.name %> (<%= m.email %>)</strong>
+    <p><%= m.message %></p>
+    <small class='text-muted'><%= m.createdAt.toLocaleString() %></small>
+  </div>
+<% }) %>
+<%- include('partials/footer') %>

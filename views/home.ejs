@@ -1,0 +1,119 @@
+<%- include('partials/header') %>
+<%- include('partials/messages') %>
+
+<!-- Hero Section -->
+<section class='hero py-5' style='background: linear-gradient(180deg,#e9f1ff,#ffffff); border-radius:14px; padding:36px' data-aos='fade-up'>
+  <div class='row align-items-center'>
+    <div class='col-lg-6'>
+      <h1 class='display-5 fw-bold' style='font-family:Poppins, Inter;'>Empowering Women Returning to Work</h1>
+      <p class='lead text-muted'>Find supportive mentors, access curated resources, and relaunch your career with confidence.</p>
+      <a class='btn btn-primary btn-lg me-2 shadow-sm' href='/register'>Get Started</a>
+      <a class='btn btn-outline-primary btn-lg' href='#mentors'>Find a Mentor</a>
+    </div>
+    <div class='col-lg-6 text-center'>
+      <img src='/images/hero-illustration.png' class='img-fluid' alt='hero' style='max-width:480px'>
+    </div>
+  </div>
+</section>
+
+<!-- About Us Section -->
+<section class='py-5' id='about'>
+  <div class='text-center mb-5' data-aos='fade-up'>
+    <h2 class='display-6 fw-bold mb-3'>About DigitalMentor</h2>
+    <p class='lead text-muted'>Connecting aspiring professionals with experienced mentors</p>
+  </div>
+  <div class='row g-4'>
+    <div class='col-md-4' data-aos='fade-up' data-aos-delay='0'>
+      <div class='card h-100 border-0 shadow-sm hover-lift'>
+        <div class='card-body p-4 text-center'>
+          <div class='mb-3'><i class='fas fa-users fa-2x text-primary'></i></div>
+          <h3 class='h5 mb-3'>Expert Mentorship</h3>
+          <p class='text-muted mb-0'>Connect with industry professionals who have real-world experience in your field.</p>
+        </div>
+      </div>
+    </div>
+    <div class='col-md-4' data-aos='fade-up' data-aos-delay='100'>
+      <div class='card h-100 border-0 shadow-sm hover-lift'>
+        <div class='card-body p-4 text-center'>
+          <div class='mb-3'><i class='fas fa-book-open fa-2x text-primary'></i></div>
+          <h3 class='h5 mb-3'>Learning Resources</h3>
+          <p class='text-muted mb-0'>Access curated educational content and practical resources for your journey.</p>
+        </div>
+      </div>
+    </div>
+    <div class='col-md-4' data-aos='fade-up' data-aos-delay='200'>
+      <div class='card h-100 border-0 shadow-sm hover-lift'>
+        <div class='card-body p-4 text-center'>
+          <div class='mb-3'><i class='fas fa-comments fa-2x text-primary'></i></div>
+          <h3 class='h5 mb-3'>Community Support</h3>
+          <p class='text-muted mb-0'>Join a supportive community dedicated to professional growth and success.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mentors Section -->
+<section class='py-5' id='mentors' style='background: linear-gradient(180deg,#ffffff,#e9f1ff)'>
+  <div class='text-center mb-5' data-aos='fade-up'>
+    <h2 class='display-6 fw-bold mb-3'>Featured Mentors</h2>
+    <p class='lead text-muted'>Learn from experienced professionals in your field</p>
+  </div>
+  <div class='row g-4'>
+    <% const mentors = [
+      ['Vanya Patel', 'Full-Stack Developer', '8+ years experience in web development'],
+      ['Ananya Singh', 'HR Director', 'Expert in talent acquisition and management'],
+      ['Priya Shah', 'Product Manager', 'Led multiple successful product launches'],
+      ['Maya Reddy', 'UX Designer', 'Specialist in user-centered design'],
+      ['Ritu Kumar', 'Marketing Lead', 'Digital marketing strategist'],
+      ['Deepa Iyer', 'Tech Lead', 'Cloud architecture and team leadership']
+    ];
+    mentors.forEach((m, i) => { %>
+      <div class='col-md-4 mb-4' data-aos='zoom-in' data-aos-delay='<%= i*100 %>'>
+        <div class='card p-4 text-center hover-lift h-100 border-0 shadow-sm'>
+          <img src='/images/default-avatar.png' class='rounded-circle mx-auto' style='width:90px;height:90px'>
+          <h5 class='mt-3'><%= m[0] %></h5>
+          <p class='text-primary mb-2'><%= m[1] %></p>
+          <p class='text-muted small mb-3'><%= m[2] %></p>
+          <a class='btn btn-sm btn-primary mt-auto' href='/mentors'>View Profile</a>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+  <div class='text-center mt-4' data-aos='fade-up'>
+    <a href='#mentors' class='btn btn-lg btn-outline-primary'>View All Mentors</a>
+  </div>
+</section>
+
+<!-- Resources Section -->
+<section class='py-5' id='resources'>
+  <div class='text-center mb-5' data-aos='fade-up'>
+    <h2 class='display-6 fw-bold mb-3'>Learning Resources</h2>
+    <p class='lead text-muted'>Curated content to support your professional development</p>
+  </div>
+  <div class='row g-4'>
+    <% const resources = [
+      ['Interview Preparation Guide', 'Comprehensive guide for job interviews', 'fas fa-clipboard-list'],
+      ['Resume Writing Workshop', 'Tips and templates for effective resumes', 'fas fa-file-alt'],
+      ['Tech Skills Roadmap', 'Latest technical skills in demand', 'fas fa-code'],
+      ['Career Transition Stories', 'Inspiring success stories', 'fas fa-user-graduate']
+    ];
+    resources.forEach((r, i) => { %>
+      <div class='col-md-6 col-lg-3' data-aos='fade-up' data-aos-delay='<%= i*100 %>'>
+        <div class='card h-100 border-0 shadow-sm hover-lift'>
+          <div class='card-body p-4'>
+            <div class='text-primary mb-3'><i class='<%= r[2] %> fa-2x'></i></div>
+            <h5 class='mb-3'><%= r[0] %></h5>
+            <p class='text-muted mb-3'><%= r[1] %></p>
+            <a href='#resources' class='btn btn-sm btn-outline-primary'>Learn More</a>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+  <div class='text-center mt-5' data-aos='fade-up'>
+    <a href='#resources' class='btn btn-lg btn-outline-primary'>Browse All Resources</a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

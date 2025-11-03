@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+<%- include('partials/messages') %>
+<div class='card p-4' data-aos='fade-up'>
+  <h3>Add Resource</h3>
+  <form id='resourceForm' action='/resources/add' method='POST'>
+    <input class='form-control mb-2' name='title' placeholder='Title' required>
+    <select name='category' class='form-select mb-2' required>
+      <% categories.forEach(c=>{ %>
+        <option value='<%= c %>'><%= c %></option>
+      <% }) %>
+    </select>
+    <label>Content</label>
+    <div id='editor' style='height:260px; background:#fff; border-radius:8px;'></div>
+    <input type='hidden' name='content' id='contentInput'>
+    <div class='mt-3'>
+      <button class='btn btn-primary' onclick='submitForm(event)'>Save Resource</button>
+      <a href='/resources' class='btn btn-outline-secondary ms-2'>Cancel</a>
+    </div>
+  </form>
+</div>
+<script>
+  const quill = new Quill('#editor', { theme: 'snow' });
+  function submitForm(e){ e.preventDefault(); document.getElementById('contentInput').value = quill.root.innerHTML; document.getElementById('resourceForm').submit(); }
+</script>
+<%- include('partials/footer') %>
