@@ -53,6 +53,25 @@ body{
     padding-right:18px; 
 }
 
+
+/* Image */
+.blend-wrapper {
+  position: relative;
+  display: inline-block;
+  max-width: 480px;
+}
+
+.blend-wrapper img {
+  width: 100%;
+  -webkit-mask-image: radial-gradient(circle at center, black 70%, transparent 100%);
+  mask-image: radial-gradient(circle at center, black 70%, transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+}
+/* Image */
+
 @media (max-width:768px){ .display-5{ font-size:28px } .hero{ padding:20px } }
 
 
