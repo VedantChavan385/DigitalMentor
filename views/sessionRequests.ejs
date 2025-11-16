@@ -7,13 +7,15 @@
   </div>
 <% } else { %>
   <% requests.forEach(r=>{ %>
-    <div class='card p-3 mb-3' data-aos='fade-up'>
+    <div class='card p-3 mb-3 session-row' data-aos='fade-up'>
       <strong>Mentee:</strong> <%= r.mentee.name %>
       <p>Date: <%= r.date.toLocaleString() %></p>
       <p>Note: <%= r.note %></p>
       <p>Status: <%= r.status %></p>
-      <form method='POST' action='/sessions/requests/<%= r._id %>/accept' style='display:inline'><button class='btn btn-success btn-sm'>Accept</button></form>
-      <form method='POST' action='/sessions/requests/<%= r._id %>/reject' style='display:inline'><button class='btn btn-danger btn-sm'>Reject</button></form>
+      <div>
+        <button class='btn btn-success btn-sm session-action' data-id='<%= r._id %>' data-action='accept'>Accept</button>
+        <button class='btn btn-danger btn-sm session-action' data-id='<%= r._id %>' data-action='reject'>Reject</button>
+      </div>
     </div>
   <% }) %>
 <% } %>

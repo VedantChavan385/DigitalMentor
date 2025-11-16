@@ -10,5 +10,10 @@
   <% if(user.role==='mentor'){ %>
     <p><a href='/sessions/requests' class='btn btn-outline-primary'>Session Requests</a></p>
   <% } %>
+  <p><a href='/messages' class='btn btn-outline-primary'>Messages</a></p>
+  <% if(user.role!=='mentor'){ %>
+    <!-- show messages link for non-mentors too -->
+  <% } %>
+  
 </div>
 <%- include('partials/footer') %>

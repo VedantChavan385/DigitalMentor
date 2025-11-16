@@ -1,20 +1,58 @@
 <%- include('partials/header') %>
 <%- include('partials/messages') %>
 <h3 data-aos='fade-down'>Chat</h3>
-<div id='chatBox' style='height:400px; overflow:auto; background:#f8fbff; padding:12px' data-aos='fade-up'>
+<div id='messages' style='height:400px; overflow:auto; background:#f8fbff; padding:12px' data-aos='fade-up'>
   <% msgs.forEach(m=>{ %>
     <div class='mb-2'><strong><%= m.from.name %>:</strong> <%= m.content %> <small class='text-muted'><%= m.createdAt.toLocaleString() %></small></div>
   <% }) %>
 </div>
 <form id='chatForm'>
-  <textarea id='msg' class='form-control' required></textarea>
-  <button class='btn btn-primary mt-2'>Send</button>
+  <textarea id='messageInput' name='message' class='form-control' required></textarea>
+  <button class='btn btn-primary mt-2' type='submit'>Send</button>
 </form>
 <script>
-  const socket = io();
-  const room = ['<%= (locals.user && locals.user._id) || "" %>', '<%= withId %>'].sort().join('-');
-  socket.emit('joinRoom', { room });
-  document.getElementById('chatForm').addEventListener('submit', e=>{ e.preventDefault(); const content = document.getElementById('msg').value; socket.emit('chatMessage', { from: '<%= locals.user._id %>', to: '<%= withId %>', content, room }); document.getElementById('msg').value = ''; });
-  socket.on('newMessage', data => { const box = document.getElementById('chatBox'); const div = document.createElement('div'); div.innerHTML = '<strong>' + (data.from==='<%= locals.user._id %>'? 'You' : 'Them') + ':</strong> ' + data.content; box.appendChild(div); box.scrollTop = box.scrollHeight; });
+  // expose minimal chat context for the client script
+  window.DM_CHAT = {
+    withId: '<%= withId %>',
+    me: '<%= (locals.user && locals.user._id) || "" %>'
+  };
 </script>
+<div class='mt-3'>
+  <button id='startCallBtn' class='btn btn-success btn-sm'>Start Video Call</button>
+  <button id='endCallBtn' class='btn btn-danger btn-sm d-none'>End Call</button>
+</div>
+<div class='mt-2'>
+  <button id='muteBtn' class='btn btn-secondary btn-sm d-none'>Mute</button>
+  <button id='cameraBtn' class='btn btn-secondary btn-sm d-none'>Camera Off</button>
+</div>
+<div class='row mt-3'>
+  <div class='col-md-6'>
+    <label>Local</label>
+    <video id='localVideo' autoplay muted playsinline style='width:100%; background:#000'></video>
+  </div>
+  <div class='col-md-6'>
+    <label>Remote</label>
+    <video id='remoteVideo' autoplay playsinline style='width:100%; background:#000'></video>
+  </div>
+</div>
 <%- include('partials/footer') %>
+
+<!-- Incoming call modal -->
+<div class="modal fade" id="incomingCallModal" tabindex="-1" aria-labelledby="incomingCallLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="incomingCallLabel">Incoming Video Call</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p id="incomingCallFrom">Someone is calling you.</p>
+        <p class="text-muted">Allow camera and microphone to join the call.</p>
+      </div>
+      <div class="modal-footer">
+        <button id="declineCallBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Decline</button>
+        <button id="acceptCallBtn" type="button" class="btn btn-primary">Accept</button>
+      </div>
+    </div>
+  </div>
+</div>
