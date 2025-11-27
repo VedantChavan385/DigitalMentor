@@ -1,28 +1,81 @@
-Pre login ids of mentor and mentee
-- vanya@example.com / password123 (mentor)
-- asha@example.com / password123 (mentee)
-- admin@example.com / password123 (admin)
+# DigitalMentor
+
+Empowering women to return to their careers through mentorship, real-time chat, and video calling.
+
+## Overview
+
+DigitalMentor is a web platform that connects mentees (returning professionals) with experienced mentors. Features include one-to-one messaging, real-time WebRTC video calling, resource sharing, and session request management.
 
 ## Features
 
-### Video Calling
-- **Real-time WebRTC Video Calls**: Mentors and mentees can initiate one-to-one video calls with bidirectional audio and video.
-- **Easy Call Initiation**: From the Messages page, click the "Call" button next to any contact to start a video call.
-- **Call Controls**: During a call, use the Mute and Camera Off buttons to toggle audio and video.
-- **Incoming Call Notifications**: Receive an incoming call modal with the caller's name. Accept or decline calls before joining.
-- **Auto-call Links**: Append `?autocall=1` to the chat URL to automatically start a call when the receiver accepts.
+- **User Authentication** — Register as mentor or mentee; secure login with bcrypt hashing
+- **Real-time Messaging** — One-to-one chat with unread count badges and conversation history
+- **Video Calling** — WebRTC peer-to-peer calls with mute/camera controls and incoming call notifications
+- **Mentor Browsing** — Search and view mentor profiles by expertise
+- **Resources** — Mentors can post articles/guides; mentees can view and learn
+- **Session Requests** — Schedule mentorship sessions with date/note tracking
+- **Admin Dashboard** — Manage users and platform content
+- **Responsive Design** — Bootstrap-based UI for desktop and mobile
 
-### Calling Rules
-- **Mentors** can call any **mentee** from their Messages list.
-- **Mentees** can call any **mentor** from their Messages list.
-- **Admins** can call any user.
-- All calls are end-to-end encrypted via WebRTC (peer-to-peer).
+## Tech Stack
 
-### How to Use Video Calling
-1. Navigate to **Messages** in the main menu.
-2. Select a contact (mentor or mentee) from the conversation list.
-3. Click the **"Call"** button to initiate a video call.
-4. The recipient will see an incoming call notification with your name.
-5. The recipient clicks **Accept** to join the call.
-6. Use **Mute** and **Camera Off** buttons to control your media during the call.
-7. Click **End Call** to disconnect.
+- **Backend:** Node.js, Express.js, MongoDB (Mongoose ODM)
+- **Real-time:** Socket.IO (signaling, chat, notifications)
+- **Media:** WebRTC (peer-to-peer video/audio)
+- **Frontend:** EJS templates, Bootstrap 5, Vanilla JavaScript
+- **Authentication:** express-session, bcrypt
+- **File Uploads:** Multer
+
+## Installation
+
+### Prerequisites
+- Node.js (v14+)
+- MongoDB (local or Atlas connection)
+- npm
+
+### Setup Steps
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/VedantChavan385/DigitalMentor.git
+   cd DigitalMentor
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment variables:**
+   Create a `.env` file in the project root:
+   ```env
+   PORT=3000
+   MONGO_URI=mongodb://127.0.0.1:27017/digitalmentor_complete
+   SESSION_SECRET=your_secret_key_here
+   NODE_ENV=development
+   ```
+
+4. **Start the application:**
+   ```bash
+   npm run dev
+   ```
+   or for production:
+   ```bash
+   node app.js
+   ```
+
+5. **Open in browser:**
+   ```
+   http://localhost:3000
+   ```
+
+## Database Setup
+
+### MongoDB Local Installation
+- Download and install MongoDB Community Edition
+- Start MongoDB service (default: `mongodb://127.0.0.1:27017`)
+- Update `MONGO_URI` in `.env` if using a different connection
+
+### MongoDB Atlas (Cloud)
+- Create a free cluster at https://www.mongodb.com/cloud/atlas
+- Get connection string and update `MONGO_URI` in `.env`
