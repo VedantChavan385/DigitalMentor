@@ -6,6 +6,7 @@ const http = require('http');
 const session = require('express-session');
 const flash = require('connect-flash');
 require('dotenv').config();
+const bcrypt = require("bcryptjs");
 
 //Database Connection
 const PORT = process.env.PORT || 3000;
